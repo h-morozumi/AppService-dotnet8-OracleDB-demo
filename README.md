@@ -18,6 +18,8 @@ Azure App Service (Windows) 上で、.NET 8 アプリケーションと Oracle D
 
 ## Azureへのデプロイ
 
+このリポジトリをAzureにデプロイするには、Azure Developer CLIを使用します。以下の手順に従ってください。
+
 1. リポジトリをチェックアウト
     ```bash
     git clone https://github.com/hmorozumi/AppService-dotnet8-OracleDB-demo.git
@@ -47,6 +49,8 @@ Azure App Service (Windows) 上で、.NET 8 アプリケーションと Oracle D
     ```bash
     azd down
     ```
+
+インフラの構成については、[Azureインフラの構成](./infra/README.md)を参照してください。
 
 ## ローカルでの実行方法
 

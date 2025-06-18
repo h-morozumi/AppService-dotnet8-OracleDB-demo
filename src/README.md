@@ -8,6 +8,7 @@
     ```
 2. .NET 8 SDKを使用するためのglobal.jsonを作成
     ```powershell
+    cd src
     dotnet new globaljson --sdk-version 8.0.411
     ```
     sdk-versionは、インストールされているバージョンに合わせて変更してください。
@@ -34,7 +35,7 @@
     # 2) ORMとしてDapperをインストール
     dotnet add package Dapper
     ```
-6. Oracleに接続し、データを主とするようにアプリケーションを修正
+6. Oracleに接続し、データを取得するようにアプリケーションを修正
 7. プロジェクトをSecretsに登録
     ```powershell
     dotnet user-secrets init
