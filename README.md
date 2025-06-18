@@ -56,8 +56,13 @@ Azure App Service (Windows) 上で、.NET 8 アプリケーションと Oracle D
     docker-compose up -d
     ```
     [ローカル開発（実行）用環境手順書](./dev/README.md)
-2. アプリケーションをビルド
+2. Seacretsに接続文字列を登録
     ```bash
     cd ../src
-    dotnet build
+    dotnet user-secrets set "ConnectionStrings:OracleDb" "User Id=SCOTT;Password=tiger;Data Source=//localhost:1521/XEPDB1"
     ```
+2. アプリケーションを実行
+    ```bash
+    dotnet watch run 
+    ```
+    [アプリケーション構築メモ](./src/README.md)

@@ -14,6 +14,9 @@ resource appService 'Microsoft.Web/sites@2024-11-01' = {
   name: appServiceName
   location: location
   kind: 'app,windows'
+  tags: {
+    'azd-service-name': 'webapp'
+  }
   properties: {
     serverFarmId: appServicePlanId
     siteConfig: {

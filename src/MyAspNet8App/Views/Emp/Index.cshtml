@@ -1,0 +1,37 @@
+@model IEnumerable<MyAspNet8App.Models.Emp>
+
+@{
+    ViewData["Title"] = "従業員一覧";
+}
+
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>EmpNo</th>
+      <th>Name</th>
+      <th>Job</th>
+      <th>Mgr</th>
+      <th>HireDate</th>
+      <th>Salary</th>
+      <th>Comm</th>
+      <th>Dept</th>
+    </tr>
+  </thead>
+  <tbody>
+@foreach (var e in Model)
+{
+    <tr>
+      <td>@e.EmpNo</td>
+      <td>@e.EName</td>
+      <td>@e.Job</td>
+      <td>@e.Mgr</td>
+      <td>@e.HireDate</td>
+      <td>@e.Sal</td>
+      <td>@e.Comm</td>
+      <td>@e.DeptNo</td>
+    </tr>
+}
+  </tbody>
+</table>
