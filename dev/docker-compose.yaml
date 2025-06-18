@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  oracle:
+    image: hmorozumi/oraclexe:1.0
+    container_name: oracle
+    environment:
+      ORACLE_PWD: password
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo 'exit' | sqlplus -L sys/password@localhost:1521/XEPDB1 as sysdba"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+
+  init:
+    image: oraclelinux:8
+    depends_on:
+      oracle:
+        condition: service_healthy
+    volumes:
+      - ./template/scripts:/init
+    entrypoint: >
+      bash -c "
+        dnf install -y oracle-release-el8 && 
+        dnf install -y oracle-instantclient-release-el8 &&
+        dnf install -y oracle-instantclient-basic oracle-instantclient-sqlplus &&
+        sqlplus SYSTEM/password@oracle:1521/XEPDB1 @/init/scott.sql
+      "

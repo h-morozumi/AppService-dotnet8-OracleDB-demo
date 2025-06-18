@@ -48,3 +48,16 @@ Azure App Service (Windows) 上で、.NET 8 アプリケーションと Oracle D
     azd down
     ```
 
+## ローカルでの実行方法
+
+1. ローカルのDocker環境を起動
+    ```bash
+    cd dev
+    docker-compose up -d
+    ```
+    [ローカル開発（実行）用環境手順書](./dev/README.md)
+2. アプリケーションをビルド
+    ```bash
+    cd ../src
+    dotnet build
+    ```

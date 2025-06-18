@@ -29,6 +29,10 @@ resource appService 'Microsoft.Web/sites@2024-11-01' = {
           value: appInsightsConnectionString
         }
         {
+          name: 'ApplicationInsightsAgent_EXTENSION_VERSION'
+          value: '~3'
+        }
+        {
           name: 'ConnectionStrings:OracleDb'
           value: 'User Id=SCOTT;Password=tiger;Data Source=//${oracleIp}:1521/XEPDB1'
         }
