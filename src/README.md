@@ -36,6 +36,12 @@
     dotnet add package Dapper
     ```
 6. Oracleに接続し、データを取得するようにアプリケーションを修正
+    - Program.cs 9~10行目を追加
+    - ControllersにEmpController.csを追加
+    - Dataフォルダを追加し、EmpRepository.csを追加 (データベースの接続とクエリの実行)
+    - ModelsにEmp.csを追加 (データモデルの定義)
+    - ViewsにEmpフォルダを追加し、Index.cshtmlを追加 (データ表示用のビュー)
+    - HomeのIndex.cshtmlを修正 (EmpControllerへのリンクを追加)
 7. プロジェクトをSecretsに登録
     ```powershell
     dotnet user-secrets init
