@@ -39,7 +39,7 @@ Azure App Service (Windows) 上で、.NET 8 アプリケーションと Oracle D
     ```
 5. Azure Developer CLI で環境を作成
     ```bash
-    azd env new
+    azd env new dev
     ```
 6. Azure Developer CLI でインフラをデプロイ
     ```bash

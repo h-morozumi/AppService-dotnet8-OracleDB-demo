@@ -3,20 +3,30 @@ param location string
 @description('Oracle Database Express Edition Container Image')
 param containerImage string = 'container-registry.oracle.com/database/express:latest'
 @description('Container Instance Name')
-param conainerName string
+param containerName string
 
 @description('Create Oracle Database Container Instance')
 module containerInstance '../core/compute/containerInstance.bicep' = {
   name: 'containerInstanceModule'
   params: {
-    conainerName: conainerName
+    containerName: containerName
     containerImage: containerImage
     location: location
+    cpu: 2
+    memoryInGB: 4
+    restartPolicy: 'Never'
+    ports: [
+      { port: 1521, protocol: 'TCP' }
+      { port: 5500, protocol: 'TCP' }
+    ]
+    environmentVariables: [
+      { name: 'ORACLE_PWD', value: 'password' }
+    ]
   }
 }
 
 @description('Oracle DB initialization script')
-module oracleInitScript '../core/database/oracle/oracleScript.bicep' = {
+module oracleInitScript './oracleScript.bicep' = {
   name: 'oracleInitScriptModule'
   params: {
     location: location

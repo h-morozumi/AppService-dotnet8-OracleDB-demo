@@ -2,44 +2,27 @@
 param appServiceName string
 @description('App Service Region')
 param location string
+@description('App Service Plan ID')
 param appServicePlanId string
+
+param appSettings array = []
 param windowsFxVersion string = 'DOTNET|8.0'
 param netFrameworkVersion string = 'v8.0'
-param oracleIp string
-param appInsightsInstrumentationKey string
-param appInsightsConnectionString string
+param kind string = 'app,windows'
+param tags object = {}
 
 @description('Create App Service')
 resource appService 'Microsoft.Web/sites@2024-11-01' = {
   name: appServiceName
   location: location
-  kind: 'app,windows'
-  tags: {
-    'azd-service-name': 'webapp'
-  }
+  kind: kind
+  tags: tags
   properties: {
     serverFarmId: appServicePlanId
     siteConfig: {
       windowsFxVersion: windowsFxVersion
       netFrameworkVersion: netFrameworkVersion
-      appSettings: [
-        {
-          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: appInsightsInstrumentationKey
-        }
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: appInsightsConnectionString
-        }
-        {
-          name: 'ApplicationInsightsAgent_EXTENSION_VERSION'
-          value: '~3'
-        }
-        {
-          name: 'ConnectionStrings:OracleDb'
-          value: 'User Id=SCOTT;Password=tiger;Data Source=//${oracleIp}:1521/XEPDB1'
-        }
-      ]
+      appSettings: appSettings
     }
     httpsOnly: true
   }

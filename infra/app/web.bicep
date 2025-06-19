@@ -10,6 +10,8 @@ param appInsightsName string
 param logAnalyticsName string
 @description('Oracle IP Address')
 param oracleIp string
+@description('use azd up & deploy to set this value')
+param tags object
 
 module appServicePlan '../core/web/appservicePlan.bicep' = {
   name: 'appServicePlanModule'
@@ -41,9 +43,25 @@ module appService '../core/web/appservice.bicep' = {
   params: {
     location: location
     appServiceName: appServiceName
+    tags: tags
     appServicePlanId: appServicePlan.outputs.appServicePlanId
-    appInsightsInstrumentationKey: applicationInsights.outputs.appInsightsInstrumentationKey
-    appInsightsConnectionString: applicationInsights.outputs.appInsightsConnectionString
-    oracleIp: oracleIp
+    appSettings:[
+      {
+        name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+        value: applicationInsights.outputs.appInsightsInstrumentationKey
+      }
+      {
+        name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+        value: applicationInsights.outputs.appInsightsConnectionString
+      }
+      {
+        name: 'ApplicationInsightsAgent_EXTENSION_VERSION'
+        value: '~3'
+      }
+      {
+        name: 'ConnectionStrings:OracleDb'
+        value: 'User Id=SCOTT;Password=tiger;Data Source=//${oracleIp}:1521/XEPDB1'
+      }
+    ]
   }
 }

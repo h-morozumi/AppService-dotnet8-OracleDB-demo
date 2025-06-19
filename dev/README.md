@@ -17,3 +17,25 @@
 ## 解説
 DockerでOracle Database XEを起動します。初回のみ、データ投入を実行します。
 
+## DBへの接続確認方法
+
+1. OracleのContainerIDを確認
+   ```bash
+   docker ps
+   ```
+2. Oracleに接続
+   ```bash
+   docker exec -it <container_id> /bin/bash
+   ```
+3. SQL*Plusを起動
+    ```bash
+    sqlplus SCOTT/tiger@XEPDB1
+   ```
+4. テーブルの確認
+   ```sql
+    SELECT EMPNO, ENAME FROM EMP;
+   ```
+5. 管理者でログインする方法
+   ```sql
+   sqlplus SYSTEM/password@XEPDB1
+   ```
